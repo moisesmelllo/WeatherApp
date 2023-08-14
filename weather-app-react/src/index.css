@@ -1,18 +1,62 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,700;1,6..12,1000&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,700;1,6..12,1000&display=swap');
 
 * {
   margin: 0;
   padding: 0;
-  font-family: "Nunito Sans", sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 1.5rem;
 }
 
 .App {
-  background-color: red;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-image: url('./img/weather-background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.pesquisa {
+  padding-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.pesquisa input {
+  font-size: 1rem;
+  width: 300px;
+}
+
+.pesquisa button {
+  font-size: 1rem;
+   width: 110px;
+}
+
+input::placeholder {
+  padding-left: 10px;
 }
 
 .body {
-  background-color: aqua;
-  max-width: 100px;
-  display: block;
+  flex: 1; /* Ocupa o espaço disponível entre o topo e o footer */
+  display: flex;
+  justify-content: space-evenly;
+  padding: 50px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  color: white;
+
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Alinha na parte inferior */
   align-items: center;
+  padding: 100px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  color: white;
+}
+
+.content {
+  margin: 10px;
 }
