@@ -6,26 +6,35 @@ import {format} from 'date-fns'
 
 function App() {
   const [apiData, setApiData] = useState({});
+  const [searchLocation, setSearchLocation] = useState("");
 
+  const fetchData = () => {
+    const api_key = `https://api.openweathermap.org/data/2.5/weather?q=${searchLocation}&APPID=${key}&units=metric`
 
-  useEffect(() => {
-    const api_key = `https://api.openweathermap.org/data/2.5/weather?q=guarulhos&APPID=${key}&units=metric`
-    console.log(api_key)
+    axios.get(api_key)
+      .then(response => {
+        setApiData(response.data)
+      })
+      .catch(error => {
+        console.error('Erro na requisição: ', error);
+      });
+  };
 
-  axios.get(api_key)
-    .then(response => {
-      setApiData(response.data)
-    })
-    .catch(error => {
-      console.error('Erro na requisição: ', error);
-    });
-  }, [])
+  const handleSearch = () => {
+    fetchData();
+  };
+
 
   return (
     <div className="App">
       <section className="pesquisa">
-        <input type="text" placeholder="Digite seu local" />
-        <button>Pesquisar</button>
+        <input 
+        type="text" 
+        placeholder="Digite seu local" 
+        value={searchLocation}
+        onChange={(e) => setSearchLocation(e.target.value)}
+        />
+        <button onClick={() => handleSearch()}>Pesquisar</button>
       </section>
       {Object.keys(apiData).length > 0 && (
         <>
