@@ -4,7 +4,8 @@
   margin: 0;
   padding: 0;
   font-family: 'Nunito Sans', sans-serif;
-  font-size: 1.5rem;
+  font-weight: bolder;
+  font-size: 1.8rem;
 }
 
 .App {
@@ -21,6 +22,7 @@
   padding-top: 30px;
   display: flex;
   justify-content: center;
+  font-weight: 100;
 }
 
 .pesquisa input {
@@ -30,7 +32,8 @@
 
 .pesquisa button {
   font-size: 1rem;
-   width: 110px;
+  width: 140px;
+  padding: 0 5px 0 5px;
 }
 
 input::placeholder {
@@ -40,8 +43,8 @@ input::placeholder {
 .body {
   flex: 1; /* Ocupa o espaço disponível entre o topo e o footer */
   display: flex;
+  align-items: center;
   justify-content: space-evenly;
-  padding: 50px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   color: white;
 
