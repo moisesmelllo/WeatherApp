@@ -8,6 +8,13 @@
   font-size: 1.8rem;
 }
 
+@media (max-width: 599px) {
+
+  div {
+  font-size: 1.4rem;
+  }
+}
+
 .App {
   display: flex;
   flex-direction: column;
@@ -36,6 +43,21 @@
   padding: 0 5px 0 5px;
 }
 
+@media (max-width: 599px) {
+
+  .pesquisa input {
+  padding: 0 0 0 10px;
+  font-size: 0.6rem;
+  width: 50vw;
+}
+
+  .pesquisa button {
+    font-size: 0.6rem;
+    width: 25vw;
+    padding: 5px 5px 5px 5px;
+}
+}
+
 input::placeholder {
   padding-left: 10px;
 }
@@ -62,4 +84,9 @@ input::placeholder {
 
 .content {
   margin: 10px;
+}
+
+.media {
+  display: flex;
+  justify-content: center;
 }
