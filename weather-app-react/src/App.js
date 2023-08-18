@@ -1,28 +1,43 @@
 import React, { useEffect, useState } from "react";
 import "./index.css";
 import axios from "axios";
-import { key } from "./keys";
+import { key, img_key } from "./keys";
 import {format} from 'date-fns'
 
 function App() {
   const [apiData, setApiData] = useState({});
   const [searchLocation, setSearchLocation] = useState("");
   const [apiError, setApiError] = useState(null);
+  const [imageUrl, setImageUrl] = useState("");
 
   const fetchData = () => {
     const api_key = `https://api.openweathermap.org/data/2.5/weather?q=${searchLocation}&APPID=${key}&units=metric`
-    console.log(api_key);
+    const api_img = `https://api.unsplash.com/search/photos?query=${searchLocation}&client_id=${img_key}`
 
     axios.get(api_key)
       .then(response => {
         setApiData(response.data)
+        setApiError(null)
+        setSearchLocation("")
+        fetchImage(api_img)
       })
       .catch(error => {
         console.error('Erro na requisição: ', error);
-        setApiError("Erro na requisição.");
+        setApiData({})
+        setApiError("Localização não encontrada. Verifique o nome e tente novamente.");
+        setSearchLocation("")
       });
+  };
 
-      
+  const fetchImage = (url) => {
+    axios.get(url)
+      .then(response => {
+        const image = response.data.results[0].urls.regular; // Obtém a URL da imagem do resultado
+        setImageUrl(image);
+      })
+      .catch(error => {
+        console.error('Erro na requisição da imagem: ', error);
+      });
   };
 
   const handleKeyPress = (e) => {
@@ -31,7 +46,9 @@ function App() {
         }}
 
 return (
-    <div className="App">
+    <div className={`App ${ Object.keys(apiData).length ? 'background' : 'default-background'}`}
+       style={{ backgroundImage:  Object.keys(apiData).length && `url(${imageUrl})` }}>
+      
       <section className="pesquisa">
         <input 
           className="input"
@@ -43,14 +60,17 @@ return (
         />
         <button onClick={() => fetchData()}>Pesquisar</button>
       </section>
-      {apiError && <div className="error">{apiError}</div>}
+      <section className="box">
       {apiData.name && (
         <>
           <section className="body">
-            <div className="content">{apiData.name}</div>
-            {apiData.main && (
-              <div className="content">{apiData.main.temp.toFixed(0)}ºC</div>
-            )}
+            <div className="container">
+              <div className="content">{apiData.name}</div>
+              {apiData.main && (
+                <div className="content degree">{apiData.main.temp.toFixed(0)}</div>
+              )}
+              <p className="metric">ºC</p>
+            </div>
           </section>
           <section className="media">
             {apiData.sys && (
@@ -67,6 +87,8 @@ return (
           </section>
         </>
       )}
+        {apiError && <div className="error-content">{apiError}</div>}
+      </section>
     </div>
   );
 }
