@@ -19,13 +19,9 @@ function App() {
     const api_key = `https://api.openweathermap.org/data/2.5/weather?q=${searchLocation}&APPID=${key}&units=metric`
     const api_img = `https://api.unsplash.com/search/photos?query=${searchLocation}&client_id=${img_key}`
 
-    console.log(api_key);
-    console.log(api_img);
-
     axios.get(api_key)
       .then(response => {
         setApiData(response.data)
-        console.log(response);
         setApiError(null)
         setSearchLocation("")
         fetchImage(api_img)
