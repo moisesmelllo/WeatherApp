@@ -90,13 +90,13 @@ return (
               <p><span className="material-symbols-outlined">
                 air
                 </span></p>
-              <p>{apiData.wind.speed}</p>
+              <p>{apiData.wind.speed.toFixed(0)} Km/h</p>
             </div>
             <div className="umidade">
               <p><span className="material-symbols-outlined umidade-simbol">
                 humidity_low
                 </span></p>
-              <p>{apiData.main.humidity}</p>
+              <p>{apiData.main.humidity}%</p>
             </div>
           </section>
           <section className="footer">
@@ -110,7 +110,11 @@ return (
         </>
         </section>
       )}
-        {apiError && <div className="error-content">{apiError}</div>}
+        {apiError && 
+          <div className="error-content box">
+            <p>{apiError}</p>
+          </div>
+        }
       
     </div>
   );
