@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./index.css";
 import axios from "axios";
-import { key, img_key } from "./keys";
+import { key, img_key } from "./keys.jsx";
 import {format} from 'date-fns'
 
 function App() {
