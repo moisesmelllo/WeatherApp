@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import "./index.css";
 import axios from "axios";
-import { key, img_key } from "./keys";
 import {format} from 'date-fns'
 
 
@@ -10,12 +9,18 @@ function App() {
   const [searchLocation, setSearchLocation] = useState("");
   const [apiError, setApiError] = useState(null);
   const [imageUrl, setImageUrl] = useState("");
+  
+  const img_key = process.env.REACT_APP_IMG_KEY
+  const key = process.env.REACT_APP_KEY;
+
+
 
   const fetchData = () => {
     const api_key = `https://api.openweathermap.org/data/2.5/weather?q=${searchLocation}&APPID=${key}&units=metric`
     const api_img = `https://api.unsplash.com/search/photos?query=${searchLocation}&client_id=${img_key}`
 
-    
+    console.log(api_key);
+    console.log(api_img);
 
     axios.get(api_key)
       .then(response => {
